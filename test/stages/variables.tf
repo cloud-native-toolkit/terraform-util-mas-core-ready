@@ -1,18 +1,21 @@
 
-# Resource Group Variables
-variable "resource_group_name" {
+variable cluster_username { 
   type        = string
-  description = "Existing resource group where the IKS cluster will be provisioned."
+  description = "The username for AWS access"
 }
 
-variable "ibmcloud_api_key" {
+variable "cluster_password" {
   type        = string
-  description = "The api key for IBM Cloud access"
+  description = "The password for AWS access"
 }
 
-variable "region" {
+variable "server_url" {
   type        = string
-  description = "Region for VLANs defined in private_vlan_number and public_vlan_number."
+}
+
+variable "bootstrap_prefix" {
+  type = string
+  default = ""
 }
 
 variable "namespace" {
@@ -37,14 +40,49 @@ variable "cluster_exists" {
   default     = "true"
 }
 
-variable "name_prefix" {
+variable "git_token" {
   type        = string
-  description = "Prefix name that should be used for the cluster and services. If not provided then resource_group_name will be used"
-  default     = ""
+  description = "Git token"
 }
 
-variable "vpc_cluster" {
-  type        = bool
-  description = "Flag indicating that this is a vpc cluster"
-  default     = false
+variable "git_host" {
+  type        = string
+  default     = "github.com"
+}
+
+variable "git_type" {
+  default = "github"
+}
+
+variable "git_org" {
+  default = "cloud-native-toolkit-test"
+}
+
+variable "git_repo" {
+  default = "git-module-test"
+}
+
+variable "gitops_namespace" {
+  default = "openshift-gitops"
+}
+
+variable "git_username" {
+}
+
+variable "kubeseal_namespace" {
+  default = "sealed-secret"
+}
+
+variable "cp_entitlement_key" {
+}
+
+variable "ibmcloud_api_key" {
+  type        = string
+  description = "The api key for IBM Cloud access"
+}
+
+variable "osdSize" {
+  description = "Size of your storage devices. The total storage capacity of your ODF cluster is equivalent to the osdSize x 3 divided by the numOfOsd."
+  type = string
+  default = "250Gi"
 }
