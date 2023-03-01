@@ -52,7 +52,16 @@ while [[ $count -lt $limit ]]; do
 
   SLS_INTEGRATION_REASON=$(echo "${CONDITION}" | jq -r '.reason')
   echo "SLS Integration reason: ${SLS_INTEGRATION_REASON}"
-  if [[ "${SLS_INTEGRATION_REASON}" == "Ready" ]]; then
+  if [[ "${SLS_INTEGRATION_REASON}" == "MissingLicenseFile" ]]; then
+    HOST=$(oc get route -n "${NAMESPACE}" "${INSTANCE_ID}-admin" -o 'jsonpath={.spec.host}')
+
+    echo "Waiting for license file..."
+    echo ""
+    echo "Run 'oc extract -n ${NAMESPACE} secret/${INSTANCE_ID}-credentials-superuser --to=-' to show the admin username and password"
+    echo ""
+    echo "Visit https://${HOST} to apply license"
+    echo ""
+  elif [[ "${SLS_INTEGRATION_REASON}" == "Ready" ]]; then
     break
   fi
 
