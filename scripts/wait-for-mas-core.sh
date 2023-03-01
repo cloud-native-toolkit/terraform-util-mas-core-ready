@@ -8,9 +8,13 @@ fi
 
 source "${SCRIPT_DIR}/support-functions.sh"
 
-
 NAMESPACE="$1"
 INSTANCE_ID="$2"
+
+if [[ -z "${KUBECONFIG}" ]]; then
+  echo "KUBECONFIG must be set" >&2
+  exit 1
+fi
 
 if [[ -z "${NAMESPACE}" ]]; then
   echo "namespace is required as first argument" >&2

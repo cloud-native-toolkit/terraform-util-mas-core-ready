@@ -12,6 +12,7 @@ resource "null_resource" "wait_for_mas_core" {
     command = "${path.module}/scripts/wait-for-mas-core.sh '${local.namespace}' '${var.mas_instance_id}'"
 
     environment = {
+      KUBECONFIG = var.cluster_config_file
       BIN_DIR = data.clis_check.clis.bin_dir
     }
   }
