@@ -5,7 +5,8 @@ variable "cluster_config_file" {
 
 variable "core_instance_namespace" {
   type        = string
-  description = "Namespace where mas-core operator has been installed"
+  description = "Namespace where mas-core operator has been installed. If not provided, the value will be derived from the mas_instance_id"
+  default     = ""
 }
 
 variable "mas_instance_id" {
