@@ -1,0 +1,45 @@
+name: util-mas-core-ready
+type: terraform
+description: Module to wait for MAS Core (gitops) instance to be ready in the cluster
+tags:
+  - tools
+  - devops
+  - cluster
+versions:
+  - platforms:
+      - name: clis
+        source: cloud-native-toolkit/clis
+    dependencies:
+      - id: cluster
+        interface: github.com/cloud-native-toolkit/automation-modules#cluster
+        refs: []
+      - id: mas_core
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mas-core.git
+            version: '>= 1.0.0'
+    variables:
+      - name: cluster_config_file
+        type: string
+        description: Cluster config file for Kubernetes cluster.
+        moduleRef:
+          id: cluster
+          output: config_file_path
+      - name: core_instance_namespace
+        type: string
+        description: >-
+          Namespace where mas-core operator has been installed. If not provided,
+          the value will be derived from the mas_instance_id
+        default: ''
+      - name: mas_instance_id
+        type: string
+        description: The instance id for the MAS suite
+        moduleRef:
+          id: mas_core
+          output: mas_instance_id
+    version: v1.0.0
+    outputs:
+      - name: core_instance_namespace
+        description: Namespace where mas-core operator has been installed
+      - name: mas_instance_id
+        description: The instance id for the MAS suite
+id: github.com/cloud-native-toolkit/terraform-util-mas-core-ready
