@@ -4,6 +4,6 @@ resource local_file write_outputs {
 
   content = jsonencode({
     core_namespace = module.wait_for_mas_core.core_namespace
-    instance_id = module.wait_for_mas_core.mas_instance_id
+    mas_instance_id = module.wait_for_mas_core.mas_instance_id
   })
 }
