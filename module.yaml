@@ -16,13 +16,25 @@ versions:
     - id: mas_core
       refs:
         - source: github.com/cloud-native-toolkit/terraform-gitops-mas-core.git
-          version: '>= 1.0.0'
+          version: '>= 1.2.0'
   variables:
     - name: cluster_config_file
       moduleRef:
         id: cluster
         output: config_file_path
+    - name: core_namespace
+      moduleRef:
+        id: mas_core
+        output: core_namespace
+    - name: entitlement_secret_name
+      moduleRef:
+        id: mas_core
+        output: entitlement_secret_name
     - name: mas_instance_id
       moduleRef:
         id: mas_core
         output: mas_instance_id
+    - name: mas_workspace_id
+      moduleRef:
+        id: mas_core
+        output: mas_workspace_id

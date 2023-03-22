@@ -1,6 +1,6 @@
 
 locals {
-  namespace = var.core_instance_namespace != "" ? var.core_instance_namespace : "mas-${var.mas_instance_id}-core"
+  namespace = var.core_namespace != "" ? var.core_namespace : "mas-${var.mas_instance_id}-core"
 }
 
 data clis_check clis {
