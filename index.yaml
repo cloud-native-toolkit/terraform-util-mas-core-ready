@@ -16,6 +16,61 @@ versions:
       - id: mas_core
         refs:
           - source: github.com/cloud-native-toolkit/terraform-gitops-mas-core.git
+            version: '>= 1.2.0'
+    variables:
+      - name: cluster_config_file
+        type: string
+        description: Cluster config file for Kubernetes cluster.
+        moduleRef:
+          id: cluster
+          output: config_file_path
+      - name: core_namespace
+        type: string
+        description: >-
+          Namespace where mas-core operator has been installed. If not provided,
+          the value will be derived from the mas_instance_id
+        default: ''
+        moduleRef:
+          id: mas_core
+          output: core_namespace
+      - name: entitlement_secret_name
+        type: string
+        description: The name of the secret that contains the entitlement_key
+        moduleRef:
+          id: mas_core
+          output: entitlement_secret_name
+      - name: mas_instance_id
+        type: string
+        description: The instance id for the MAS suite
+        moduleRef:
+          id: mas_core
+          output: mas_instance_id
+      - name: mas_workspace_id
+        type: string
+        description: The identifier of the MAS workspace that was created
+        moduleRef:
+          id: mas_core
+          output: mas_workspace_id
+    version: v1.1.0
+    outputs:
+      - name: core_namespace
+        description: Namespace where mas-core operator has been installed
+      - name: entitlement_secret_name
+        description: The name of the secret that contains the entitlement_key
+      - name: mas_instance_id
+        description: The instance id for the MAS suite
+      - name: mas_workspace_id
+        description: The identifier of the MAS workspace that was created
+  - platforms:
+      - name: clis
+        source: cloud-native-toolkit/clis
+    dependencies:
+      - id: cluster
+        interface: github.com/cloud-native-toolkit/automation-modules#cluster
+        refs: []
+      - id: mas_core
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-gitops-mas-core.git
             version: '>= 1.0.0'
     variables:
       - name: cluster_config_file
