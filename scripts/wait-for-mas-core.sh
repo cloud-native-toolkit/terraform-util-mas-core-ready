@@ -55,6 +55,9 @@ while [[ $count -lt $limit ]]; do
   if [[ "${SLS_INTEGRATION_REASON}" == "MissingLicenseFile" ]]; then
     echo "MAS Core installed. Waiting for license file"
     break
+  elif [[ "${SLS_INTEGRATION_REASON}" == "Ready" ]]; then
+    echo "MAS Core installation is ready"
+    break
   fi
 
   echo "**** Suite result ****"
