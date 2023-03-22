@@ -23,7 +23,7 @@ if ! command -v kubectl 1> /dev/null 2> /dev/null; then
 fi
 
 export KUBECONFIG=$(cat .kubeconfig)
-NAMESPACE=$(jq -r '.core_instance_namespace // "default"' gitops-output.json)
+NAMESPACE=$(jq -r '.core_namespace // "default"' gitops-output.json)
 INSTANCE_ID=$(jq -r '.mas_instance_id // "my-module"' gitops-output.json)
 
 kubectl get -n "${NAMESPACE}" suite "${INSTANCE_ID}" -o json
